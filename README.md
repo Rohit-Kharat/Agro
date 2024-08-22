@@ -1,5 +1,5 @@
 # Agro
-FarmApp is a simple Machine Learning and Deep Learning based application that helps farmers to improve the farming strategy. The application is capable of, predicting the best crop to be cultivated for that land, predicting the best fertilizer to be used for that crop
+Agro is a simple Machine Learning and Deep Learning based application that helps farmers to improve the farming strategy. The application is capable of, predicting the best crop to be cultivated for that land, predicting the best fertilizer to be used for that crop. This project is develop by my team.
 # DATASET DETAILS 
 Crop recommendation dataset - Dataset/Crop_recommendation.csv
 Fertilizer recommendation dataset - Dataset/Fertilizer prediction.csv
