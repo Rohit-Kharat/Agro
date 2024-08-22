@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Website</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/crop_disease.css')}}"> 
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/new2.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <!-- <nav>
+      <div class="logoName">SkyCast</div>
+
+      <ul><li>Research</li>
+      <li>Climate</li>
+      <li>News</li>
+      <li>Service</li>
+  </ul>
+  </nav> -->
+
+  <header>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">FarmApp</div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('crop_recommend')}}">Crop</a></li>
+                <li><a href="{{url_for('fertilizer_recommend')}}">Fertilizer</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+  
+  <div class="container">
+      <h1>Weather of <span id="cityName"></span></h1>
+      <input type="text" id="cityInput2" placeholder="Enter city name">
+      <button onclick="getWeather(2)">Get Weather</button>
+      <div id="weatherInfo2">
+          <h2 id="cityName2"></h2>
+          <p id="temperature2"></p>
+          <p id="weatherDescription2"></p>
+      </div>
+  </div>
+
+  
+  <iframe style="width: 100%;height : 50vw;" src="https://embed.windy.com/embed2.html?lat=23.065&amp;lon=89.839&amp;detailLat=23.065&amp;detailLon=89.839&amp;width=650&amp;height=450&amp;zoom=5&amp;level=surface&amp;overlay=wind&amp;product=ecmwf&amp;menu=&amp;message=&amp;marker=&amp;calendar=now&amp;pressure=&amp;type=map&amp;location=coordinates&amp;detail=&amp;metricWind=default&amp;metricTemp=default&amp;radarRange=-1" frameborder="0"></iframe>
+      <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-heading">
+       
+        <h1>FarmApp</h1>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h2>About Us</h2>
+          <ul>
+            <li><a href="#company">Our Mission</a></li>
+            <li><a href="#team">Our Team</a></li>
+            <li><a href="#partners">Partners</a></li>
+            <li><a href="#roadmap">Future Plans</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h2>Services</h2>
+          <ul>
+            <li><a href="#crop-recommendation">Crop Recommendation</a></li>
+            <li><a href="#fertilizer-recommendation">Fertilizer Advice</a></li>
+            <li><a href="#disease-identification">Disease Identification</a></li>
+            <li><a href="#market-updates">Market Updates</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h2>Support</h2>
+          <ul>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#help">Help Center</a></li>
+            <li><a href="#community">Community Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        <p>&copy; 2024 FarmApp. All rights reserved.</p>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Manage cookies</a>
+        <a href="#">Do not share my personal information</a>
+      </div>
+      <div class="footer-social">
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-youtube"></i>
+      </div>
+    </div>
+  </footer>
+  <script>  const a = async (city) => {
+          cityName.innerHTML = city;
+          const response = await fetchWeatherData(city);
+          updateWeatherDetails(response);
+      };
+      async function getWeather(containerIndex) {
+          const apiKey = '64de275fb8d0847f305214a91086b4cc';
+          const cityInput = document.getElementById(`cityInput${containerIndex}`).value;
+          const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric`;
+
+          try {
+              const response = await fetch(url);
+              const data = await response.json();
+
+              if (data.cod === 200) {
+                  document.getElementById(`cityName${containerIndex}`).textContent = data.name;
+                  document.getElementById(`temperature${containerIndex}`).textContent = `Temperature: ${data.main.temp}°C`;
+                  document.getElementById(`weatherDescription${containerIndex}`).textContent = data.weather[0].description;
+              } else {
+                  alert('City not found. Please try again.');
+              }
+          } catch (error) {
+              alert('Error fetching weather data. Please try again later.');
+          }
+      }
+  </script>
+</body>
+
+</body>
+
+</html>
